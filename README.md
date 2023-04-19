@@ -1,4 +1,4 @@
-Tickethub
+# Tickethub
 Este es un proyecto de ejemplo para un sistema de gestión de usuarios e insumos tecnologicos, construido con tecnologías web como Java, Spring, SpringSecurity y Thymeleaf.
 
 Tabla de contenidos
@@ -8,7 +8,7 @@ Uso
 Contribuyendo
 Licencia
 Descripción
-El proyecto es un sistema de gestión de tickets de soporte técnico, donde los usuarios pueden reportar problemas o solicitar ayuda a través de una interfaz web. Los tickets son asignados a diferentes técnicos y se realiza un seguimiento hasta su resolución.
+El proyecto es un sistema de gestión de usuarios e insumos tecnologicos a través de una interfaz web.
 
 La aplicación utiliza las siguientes tecnologías:
 
@@ -16,7 +16,7 @@ Java
 Spring
 Thymeleaf
 Bootstrap
-# Tickethub
+## Tickethub
 
 Este es un proyecto de ejemplo para un sistema de gestión de tickets, construido con tecnologías web como Java, Spring, y Thymeleaf.
 
