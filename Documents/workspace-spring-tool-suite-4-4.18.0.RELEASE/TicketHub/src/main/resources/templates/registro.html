@@ -1,0 +1,190 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+
+<head>
+	<meta charset="utf-8">
+	<title>Registro de usuarios</title>
+	<!-- Latest compiled and minified CSS -->
+	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css"
+		integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+
+	<!-- Optional theme -->
+	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap-theme.min.css"
+		integrity="sha384-rHyoN1iRsVXV4nD0JutlnGaslCJuC7uwjduW9SVrLvRYooPp2bWYgmgJQIXwl/Sp" crossorigin="anonymous">
+
+	<link rel="stylesheet" type="text/css" href="static/css/style-registro.css" th:href="@{/css/style-registro.css}">
+</head>
+
+<body>
+
+	<nav class="navbar navbar-inverse navbar-fixed-top">
+		<div class="container">
+			<div class="miNombre">
+				<p class="navbar-brand">TICKETHUB</p>
+			</div>
+			<div id="navbar" class="collapse navbar-collapse">
+				<ul class="nav navbar-nav">
+
+					<li sec:authorize="isAuthenticated()"><a th:href="@{/}">
+							<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
+								class="bi bi-arrow-return-left" viewBox="0 0 16 16">
+								<path fill-rule="evenodd"
+									d="M14.5 1.5a.5.5 0 0 1 .5.5v4.8a2.5 2.5 0 0 1-2.5 2.5H2.707l3.347 3.346a.5.5 0 0 1-.708.708l-4.2-4.2a.5.5 0 0 1 0-.708l4-4a.5.5 0 1 1 .708.708L2.707 8.3H12.5A1.5 1.5 0 0 0 14 6.8V2a.5.5 0 0 1 .5-.5z" />
+							</svg> Volver</a></li>
+
+
+					<li><a id="mi-enlace" onclick="mostrarMensaje()">
+							<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
+								class="bi bi-patch-question" viewBox="0 0 16 16">
+								<path
+									d="M8.05 9.6c.336 0 .504-.24.554-.627.04-.534.198-.815.847-1.26.673-.475 1.049-1.09 1.049-1.986 0-1.325-.92-2.227-2.262-2.227-1.02 0-1.792.492-2.1 1.29A1.71 1.71 0 0 0 6 5.48c0 .393.203.64.545.64.272 0 .455-.147.564-.51.158-.592.525-.915 1.074-.915.61 0 1.03.446 1.03 1.084 0 .563-.208.885-.822 1.325-.619.433-.926.914-.926 1.64v.111c0 .428.208.745.585.745z" />
+								<path
+									d="m10.273 2.513-.921-.944.715-.698.622.637.89-.011a2.89 2.89 0 0 1 2.924 2.924l-.01.89.636.622a2.89 2.89 0 0 1 0 4.134l-.637.622.011.89a2.89 2.89 0 0 1-2.924 2.924l-.89-.01-.622.636a2.89 2.89 0 0 1-4.134 0l-.622-.637-.89.011a2.89 2.89 0 0 1-2.924-2.924l.01-.89-.636-.622a2.89 2.89 0 0 1 0-4.134l.637-.622-.011-.89a2.89 2.89 0 0 1 2.924-2.924l.89.01.622-.636a2.89 2.89 0 0 1 4.134 0l-.715.698a1.89 1.89 0 0 0-2.704 0l-.92.944-1.32-.016a1.89 1.89 0 0 0-1.911 1.912l.016 1.318-.944.921a1.89 1.89 0 0 0 0 2.704l.944.92-.016 1.32a1.89 1.89 0 0 0 1.912 1.911l1.318-.016.921.944a1.89 1.89 0 0 0 2.704 0l.92-.944 1.32.016a1.89 1.89 0 0 0 1.911-1.912l-.016-1.318.944-.921a1.89 1.89 0 0 0 0-2.704l-.944-.92.016-1.32a1.89 1.89 0 0 0-1.912-1.911l-1.318.016z" />
+								<path d="M7.001 11a1 1 0 1 1 2 0 1 1 0 0 1-2 0z" />
+							</svg> Ayuda</a></li>
+
+					<script>
+						function mostrarMensaje() {
+
+							alert("Esta aplicación Web fue desarrollada por estudiantes de la carrera de Ingenieria de Sistemas, " +
+								"alumnos de la Universidad Central. \nSus contactos son los siguientes:\n" +
+								"\nAnna Maria Sanchez Rojas: +57 3043343809" +
+								"\nFredy Danilo Ussa Cristiano: +57 3003969161" +
+								"\nDaniel Felipe Eraso Acero: +57 3133667782" +
+								"\nWilliam Orlando Pinzon Castañeda: +57 3212062572" +
+								"\n\nSi deseas dejar un numero de telefono, nos pondremos en contacto contigo lo antes posible");
+
+
+
+							prompt("Ingrese aquí la información de contacto");
+						}
+					</script>
+
+
+				</ul>
+			</div>
+
+		</div>
+	</nav>
+
+
+	<br>
+	<br>
+
+	<div class="container">
+		<div class="row">
+			<div class="col-md-6 col-md-offset-3">
+				<div th:if=${param.exito}>
+					<div class="alert alert-info">Se ha registrado exitosamente a
+						la aplicación</div>
+				</div>
+
+				<h1>Registro de Gestores</h1>
+				<form th:action="@{/registro}" method="post" th:object="${usuario}">
+
+					<div class="form-group">
+						<label class="control-label" for="nombre">Nombre* : </label>
+						<input id="nombre" type="text" class="form-control" th:field="*{nombre}" required
+							autofocus="autofocus" onchange="validateNombre(this)">
+					</div>
+
+					<script>
+						function validateNombre(input) {
+							const regex = /^[a-zA-Z\u00C0-\u017F ]*$/;
+							if (!regex.test(input.value)) {
+								alert("El nombre solo debe contener letras (Se permiten las tíldes).");
+								input.value = "";
+							}
+						}
+
+					</script>
+
+					<div class="form-group">
+						<label class="control-label" for="apellido">Apellido* : </label>
+						<input id="apellido" type="text" class="form-control" th:field="*{apellido}" required
+							autofocus="autofocus" onchange="validateApellido(this)">
+					</div>
+
+					<script>
+						function validateApellido(input) {
+							const regex = /^[a-zA-Z\u00C0-\u017F ]*$/;
+							if (!regex.test(input.value)) {
+								alert("El Apellido solo debe contener letras (Se permiten las tildes).");
+								input.value = "";
+							}
+						}
+					</script>
+
+					<div class="form-group">
+						<label class="control-label" for="email">Usuario* : </label>
+						<input type="email" id="email" class="form-control" th:field="*{username}" required
+							autofocus="autofocus" maxlength="30" onchange="validateUser(this)">
+					</div>
+
+					<script>
+						function validateUser(input) {
+							const regex = /^[a-zA-Z][a-zA-Z0-9]*@[^\s@]+\.[^\s@]+$/;
+							if (!regex.test(input.value)) {
+								alert('El usuario debe ser en formato de correo electrónico, no debe empezar por números ni caracteres y pertenecer al dominio @ucooperativa.edu.co \nEjemplo: "ejemplo@ucooperativa.edu.co"');
+								input.value = "";
+							} else if (input.value.length > 30) {
+								alert('El usuario debe tener una longitud máxima de 30 caracteres.');
+								input.value = input.value.substring(0, 30);
+							} else if (!input.value.endsWith('@ucooperativa.edu.co')) {
+								alert('El Usuario debe pertenecer al dominio @ucooperativa.edu.co');
+								input.value = "";
+							}
+						}
+
+					</script>
+
+					<h6 class="información"> ⚠ El usuario debe ser en formato de correo electrónico y 
+						pertenecer al dominio @ucooperativa.edu.co
+						Ejemplo: "ejemplo@ucooperativa.edu.co, tambien debe tener una longitud maxima de 30 caracteres.</h6>
+
+
+					<!--<div class="form-group">
+						<label class="control-label" for="username">Usuario : </label> <input id="username" type="text"
+							class="form-control" th:field="*{username}" required autofocus="autofocus">
+					</div>-->
+
+					<div class="form-group">
+						<label class="control-label" for="password">Password* : </label> <input type="password"
+							id="password" class="form-control" th:field="*{password}" required autofocus="autofocus"
+							onchange="validatePassword(this)">
+
+						<script>
+							function validatePassword(input) {
+								const regex = /^(?=.*[a-z])(?=.*[A-Z])(?=.*[!@#$%^&*()_+])(?=.{8,})\S+$/;
+								if (!regex.test(input.value)) {
+									alert("La contraseña es inválida, recuerda que debe contener al menos una letra minúscula," +
+										" una letra mayúscula, un carácter especial y una longitud mínima de 8 caracteres.");
+									input.value = "";
+								}
+							}
+						</script>
+
+
+						<!--pattern="^(?=.*[a-z])(?=.*[A-Z])(?=.*[!@#$%^&*()_+])(?=.{8,})\S+$"-->
+						<h6 class="información"> ⚠ La contraseña debe contener al menos una letra minúscula, una letra
+							mayúscula, un carácter especial y una longitud mínima de 8 caracteres.</h6>
+					</div>
+
+
+					<button type="submit" class="btn btn-success">Registrar</button>
+					<!-- <div class="form-group"><span>Si estas registrado <a th:href="@{/login}">inicia sesión aqui</a></span>-->
+			</div>
+			</form>
+
+		</div>
+	</div>
+	</div>
+
+
+	<!-- Latest compiled and minified JavaScript -->
+	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"
+		integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa"
+		crossorigin="anonymous"></script>
+</body>
+
+</html>

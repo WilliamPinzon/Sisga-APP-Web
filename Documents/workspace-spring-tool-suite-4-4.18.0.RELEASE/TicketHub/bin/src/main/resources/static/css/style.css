@@ -1,0 +1,53 @@
+body{
+    background-image: url(../Imagenes/Fondo-inicio.jpg);
+    background-size: cover;
+    background-position: center;
+}
+
+.row {
+    width: 400px;
+    height: 570px;
+    margin: auto;
+    text-align: center;
+    background-image: url(../Imagenes/Logo.jpg);
+    background-size: cover;
+    background-position: center;
+}
+
+.form-group {
+    margin-bottom: 20px;
+}
+
+.campos{
+    margin-top: 150px;
+}
+
+.password{
+    margin-top: -25px;
+}
+
+.row1{
+    width: 300px;
+    margin-left: -70px;
+    margin-top: -5px;
+}
+
+.info{
+    width: 100%;
+    height: 65px;
+    margin: auto;
+    margin-top: 02px;
+    text-align: center;
+    color: white;
+    background-color: rgba(24, 45, 64, 1);
+}
+
+h1 {
+    text-align: center;
+    font-size: 30px;
+    font-family: Kaisei Tokumin;
+    padding: 15px;
+}
+
+
+

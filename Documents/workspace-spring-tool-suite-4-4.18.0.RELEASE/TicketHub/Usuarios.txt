@@ -1,0 +1,14 @@
+Admin:
+prueba.admin@gmail.co
+Willi@12
+
+
+Gestores:
+prueba.gestor@prueba.com
+Willi@12
+
+gestor@prueba.com
+Prueba@1
+
+admin@ucooperativa.edu.co
+Admin@12
