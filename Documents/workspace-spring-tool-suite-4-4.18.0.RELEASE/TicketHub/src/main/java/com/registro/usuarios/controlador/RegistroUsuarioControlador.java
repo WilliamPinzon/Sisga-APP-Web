@@ -1,6 +1,7 @@
 package com.registro.usuarios.controlador;
 
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -31,9 +32,14 @@ public class RegistroUsuarioControlador {
 	}
 	
 	@PostMapping
-	public String registrarCuentaDeUsuario(@ModelAttribute("usuario") UsuarioRegistroDTO registroDTO) {
-		usuarioServicio.guardar(registroDTO);
-		return "redirect:/registro?exito";
+	public String registrarCuentaDeUsuario(@ModelAttribute("usuario") UsuarioRegistroDTO registroDTO, Model modelo) {
+	    if (usuarioServicio.existeUsuario(registroDTO.getUsername())) {
+	        modelo.addAttribute("usuarioExistente", true);
+	        return "registro";
+	    }
+	    
+	    usuarioServicio.guardar(registroDTO);
+	    return "redirect:/registro?exito";
 	}
 	
 }

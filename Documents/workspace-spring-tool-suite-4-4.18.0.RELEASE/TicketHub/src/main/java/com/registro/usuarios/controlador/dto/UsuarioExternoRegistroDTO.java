@@ -2,7 +2,7 @@ package com.registro.usuarios.controlador.dto;
 
 import java.time.LocalDateTime;
 
-public class UsuarioRegistroDTO {
+public class UsuarioExternoRegistroDTO {
 
 	private Long id;
 	private String nombre;
@@ -51,7 +51,7 @@ public class UsuarioRegistroDTO {
 		this.password = password;
 	}
 
-	public UsuarioRegistroDTO(Long id, String nombre, String apellido, String username, String password, LocalDateTime fechaDeRegistro) {
+	public UsuarioExternoRegistroDTO(Long id, String nombre, String apellido, String username, String password, LocalDateTime fechaDeRegistro) {
 		super();
 		this.id = id;
 		this.nombre = nombre;
@@ -61,7 +61,7 @@ public class UsuarioRegistroDTO {
 		this.fechaDeRegistro= LocalDateTime.now();
 	}
 
-	public UsuarioRegistroDTO(String nombre, String apellido, String username, String password, LocalDateTime fechaDeRegistro) {
+	public UsuarioExternoRegistroDTO(String nombre, String apellido, String username, String password, LocalDateTime fechaDeRegistro) {
 		super();
 		this.nombre = nombre;
 		this.apellido = apellido;
@@ -70,12 +70,12 @@ public class UsuarioRegistroDTO {
 		this.fechaDeRegistro= LocalDateTime.now();
 	}
 
-	public UsuarioRegistroDTO(String username) {
+	public UsuarioExternoRegistroDTO(String username) {
 		super();
 		this.username = username;
 	}
 
-	public UsuarioRegistroDTO() {
+	public UsuarioExternoRegistroDTO() {
 
 	}
 

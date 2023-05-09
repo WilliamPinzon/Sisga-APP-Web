@@ -2,7 +2,7 @@
 <html xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity3">
 	<head>
 		<meta charset="utf-8">
-		<title>Inicio Gestor</title>
+		<title>Configuracion de Usuarios</title>
 		<!-- Latest compiled and minified CSS -->
 		<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css"
 			integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
@@ -11,8 +11,8 @@
 		<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap-theme.min.css"
 			integrity="sha384-rHyoN1iRsVXV4nD0JutlnGaslCJuC7uwjduW9SVrLvRYooPp2bWYgmgJQIXwl/Sp" crossorigin="anonymous">
 	
-		<link rel="stylesheet" type="text/css" href="static/css/style-gestor.css" th:href="@{/css/style-gestorIndex.css}">
-		<link href='https://fonts.googleapis.com/css?family=Cambria' rel='stylesheet'>
+		<link rel="stylesheet" type="text/css" href="static/css/style-configUsuarios.css"
+			th:href="@{/css/style-configUsuarios.css}">
 	</head>
 	
 	<body>
@@ -49,7 +49,7 @@
 							</li>
 	
 							<li>
-								<a id="mi-enlace" onclick="mostrarOcultar()">
+								<a id="mi-enlace" onclick="mostrarOcultar()	">
 									<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
 										class="bi bi-menu-button" viewBox="0 0 16 16">
 										<path
@@ -78,6 +78,7 @@
 					<h1>Gestor</h1>
 				</div>
 				<br>
+				
 				<div class="caja">
 					<nav>
 						<ul1>
@@ -129,9 +130,7 @@
 			</section>
 	
 			<section class="segundaria">
-	
-				<div class="container1">
-					
+				<div class="container1">					
 					<div class="tabla">
 						<div class="busqueda">
 							 <h2>Usuarios Registrados</h2>
@@ -142,50 +141,178 @@
 								<input id="buscarInput" onkeyup="buscarUsuario()" placeholder="Buscar por Nombre...">
 							</div>						
 						</div>
-						<br>						
+						<br>
 						<div class="wrapper">
-							<table class="table table-striped table-bordered"
-								style="background-color:rgba(204, 191, 178, 0.788)">
-								
-								<thead class="table-dark">
-									<tr>
-										<th>Nombre</th>
-										<th>Apellido</th>
-										<th>Usuario</th>
-										<th>Fecha de Registro</th>
+						<table class="table table-striped table-bordered" style="background-color:rgba(204, 191, 178, 0.788)">
+							
+							
+							<thead class="table-dark">
+								<tr>
+									<th>Nombre</th>
+									<th>Apellido</th>
+									<th>Usuario</th>
+									<th>Fecha de Registro</th>
+									<th>Editar Datos</th>
+									<th>Eliminar</th>
+								</tr>
+							</thead>
+	
+							<tbody>
+								<tr th:each="usuario : ${usuarios_externos}">
+									<th:block
+										th:if="${usuario.username != 'prueba.admin@gmail.co' && usuario.username != 'admin@ucooperativa.edu.co'}">
+										<td th:text="${usuario.nombre}">ID</td>
+										<td th:text="${usuario.apellido}">ID</td>
+										<td th:text="${usuario.username}">ID</td>
+										<td th:text="${#temporals.format(usuario.fechaDeRegistro, 'yyyy-MM-dd HH:mm:ss')}">ID</td>
+										<td>
+											<button class="toggle-btn">Editar Datos</button>
+												<form class="user-form" th:action="@{/modificar-usuario}" method="post"
+													style="display:none"
+													onsubmit="return confirm('¿Está seguro de almacenar los cambios realizados?')">
 		
-									</tr>
-								</thead>
-								
-								<tbody>
-									<tr th:each="usuario : ${usuarios_externos}">
-										<th:block
-											th:if="${usuario.username}">
-											<td th:text="${usuario.nombre}">ID</td>
-											<td th:text="${usuario.apellido}">ID</td>
-											<td th:text="${usuario.username}">ID</td>
-											<td th:text="${#temporals.format(usuario.fechaDeRegistro, 'yyyy-MM-dd HH:mm:ss')}">ID</td>
-										</th:block>
-									</tr>
-								</tbody>
-							</table>
+													<br>
+													<input type="hidden" name="id" th:value="${usuario.id}" />
+		
+													<h6>Nombre:</h6>
+													<input type="text" name="nombre" th:value="${usuario.nombre}"
+														onchange="validateNombre(this)" required autofocus="autofocus" />
+		
+													<script>
+														function validateNombre(input) {
+															const regex = /^[a-zA-Z\u00C0-\u017F ]*$/;
+															if (!regex.test(input.value)) {
+																alert("El nombre solo debe contener letras (Se permiten las tíldes).");
+																input.value = "";
+															}
+														}
+		
+													</script>
+													
+													<h6>Apellido:</h6>
+													<input type="text" name="apellido" th:value="${usuario.apellido}"
+														onchange="validateApellido(this)" required autofocus="autofocus" />
+														
+													<script>
+														function validateApellido(input) {
+															const regex = /^[a-zA-Z\u00C0-\u017F ]*$/;
+															if (!regex.test(input.value)) {
+																alert("El Apellido solo debe contener letras (Se permiten las tildes).");
+																input.value = "";
+															}
+														}
+													</script>
+		
+													<h6>Usuario:</h6>
+		
+													<input type="email" name="username" th:value="${usuario.username}"
+														onchange="validateUser(this)" required autofocus="autofocus"
+														maxlength="30" />
+		
+													<script>
+														function validateUser(input) {
+															const regex = /^[a-zA-Z][a-zA-Z0-9]*@[^\s@]+\.[^\s@]+$/;
+															if (!regex.test(input.value)) {
+																alert('El usuario debe ser en formato de correo electrónico, no debe empezar por números ni caracteres y pertenecer al dominio @ucooperativa.edu.co \nEjemplo: "ejemplo@ucooperativa.edu.co"');
+																input.value = "";
+															} else if (input.value.length > 70) {
+																alert('El usuario debe tener una longitud máxima de 70 caracteres.');
+																input.value = input.value.substring(0, 70);
+															} else if (!input.value.endsWith('@ucooperativa.edu.co')) {
+																alert('El Usuario debe pertenecer al dominio @ucooperativa.edu.co');
+																input.value = "";
+															}
+														}
+													</script>
+		
+													<input type="hidden" name="password" th:value="${usuario.password}" />
+													<br><br>
+													<button type="submit" class="btn btn-danger">
+														<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16"
+															fill="currentColor" class="bi bi-bookmark-check-fill"
+															viewBox="0 0 16 16">
+															<path fill-rule="evenodd"
+																d="M2 15.5V2a2 2 0 0 1 2-2h8a2 2 0 0 1 2 2v13.5a.5.5 0 0 1-.74.439L8 13.069l-5.26 2.87A.5.5 0 0 1 2 15.5zm8.854-9.646a.5.5 0 0 0-.708-.708L7.5 7.793 6.354 6.646a.5.5 0 1 0-.708.708l1.5 1.5a.5.5 0 0 0 .708 0l3-3z" />
+														</svg> Guardar Cambios</button>
+												</form>
+												
+											<script>
+	
+												// Obtenemos el formulario de eliminación de usuario por su id
+												const modificarUsuarioForm = document.getElementById('modificar-usuario');
+	
+												// Agregamos un event listener para el evento "submit"
+												modificarUsuarioForm.addEventListener('submit', (event) => {
+													// Prevenimos el comportamiento por defecto de enviar el formulario
+													event.preventDefault();
+	
+													// Mostramos una alerta de confirmación para asegurarnos de que el usuario desea eliminar al usuario
+	
+													if (confirm('¿Está seguro de almacenar los cambios realizados? Esta acción no se puede deshacer.')) {
+														// Si el usuario confirma, enviamos el formulario
+														modificarUsuarioForm.submit();
+													}
+	
+												});
+											</script>
+										</td>
+	
+										<td>
+											<form th:action="@{/eliminar-usuario}" method="post"
+												onsubmit="return confirm('¿Está seguro de eliminar este Gestor?')">
+												<input type="hidden" name="id" th:value="${usuario.id}" />
+												<button type="submit" class="btn btn-danger">
+													<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16"
+														fill="currentColor" class="bi bi-trash" viewBox="0 0 16 16">
+														<path
+															d="M5.5 5.5A.5.5 0 0 1 6 6v6a.5.5 0 0 1-1 0V6a.5.5 0 0 1 .5-.5Zm2.5 0a.5.5 0 0 1 .5.5v6a.5.5 0 0 1-1 0V6a.5.5 0 0 1 .5-.5Zm3 .5a.5.5 0 0 0-1 0v6a.5.5 0 0 0 1 0V6Z" />
+														<path
+															d="M14.5 3a1 1 0 0 1-1 1H13v9a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V4h-.5a1 1 0 0 1-1-1V2a1 1 0 0 1 1-1H6a1 1 0 0 1 1-1h2a1 1 0 0 1 1 1h3.5a1 1 0 0 1 1 1v1ZM4.118 4 4 4.059V13a1 1 0 0 0 1 1h6a1 1 0 0 0 1-1V4.059L11.882 4H4.118ZM2.5 3h11V2h-11v1Z" />
+													</svg> Eliminar
+												</button>
+											</form>
+										</td>
+									</th:block>
+								</tr>
+							</tbody>
+	
+							<script>
+								const toggleBtns = document.querySelectorAll('.toggle-btn');
+								toggleBtns.forEach(toggleBtn => {
+									toggleBtn.addEventListener('click', () => {
+										const userForm = toggleBtn.parentNode.querySelector('.user-form');
+										if (userForm.style.display === 'none') {
+											userForm.style.display = 'block';
+											toggleBtn.innerHTML = 'Cancelar';
+	
+											const cancelBtn = toggleBtn.parentNode.querySelector('.toggle-btn');
+											cancelBtn.addEventListener('click', () => {
+												window.location.href = 'configUsuarios';
+											});
+	
+										} else {
+											userForm.style.display = 'none';
+											toggleBtn.innerHTML = 'Editar Datos';
+										}
+									});
+								});
+							</script>
+						</table>
 						</div>
 					</div>
 				</div>
-	
 			</section>
 		</main>
-		
+	
 		<footer>
 			<h1>© Universidad Cooperativa</h1>
 		</footer>
-	
+		
 		<!-- Latest compiled and minified JavaScript -->
 		<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"
 			integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa"
-			crossorigin="anonymous">
-		</script>
+			crossorigin="anonymous"></script>
 			
-		<script th:src="@{/js/script-gestorIndex.js}"></script>
+			<script th:src="@{/js/script-configUsuarios.js}"></script>
 	</body>
 </html>

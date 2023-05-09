@@ -58,4 +58,11 @@ public class UsuarioServicioImpl implements UsuarioServicio {
 	public List<Usuario> listarUsuarios() {
 		return usuarioRepositorio.findAll();
 	}
+	
+	@Override
+    public boolean existeUsuario(String username) {
+        Usuario usuario = usuarioRepositorio.findByUsername(username);
+        return usuario != null;
+    }
+
 }

@@ -3,7 +3,7 @@
 }
 
 body {
-	background-color: white;
+	background-color: rgb(225, 225, 225);
 	background-size: cover;
 	background-position: center;
 	margin: 0px;
@@ -14,6 +14,29 @@ body {
 
 .miNombre:hover {
 	cursor: none;
+}
+
+.busqueda {
+	box-shadow: 5px 5px 5px 5px #A9AFA3;
+	filter: shadow(color=#999999, direction=135, strength=2);
+	display: flex;
+	align-items: center;
+}
+
+.busqueda h2 {
+	margin-right: 20px;
+	padding-left: 20px;
+	padding-bottom: 5px;
+}
+
+.busqueda .buscar {
+	padding-top: 5px;
+	padding-right: 20px;
+	margin-left: auto;
+}
+
+#mi-enlace:hover {
+	cursor: pointer;
 }
 
 .ayuda {
@@ -30,62 +53,49 @@ body {
 	margin-left: 22px;
 }
 
-#mi-enlace:hover {
-	cursor: pointer;
-}
-
 main {
 	display: flex;
 	margin-bottom: 50px;
 	margin-left: 10px;
 }
 
-.bi-person-fill{
+.bi-person-fill {
 	height: 150px;
 	width: 150px;
 	border-radius: 50%;
 	object-fit: cover;
-	background: rgb(214, 254, 249);
+	background: rgb(255, 255, 255);
 }
 
 .principal {
+	background-color: rgba(24, 45, 64, 1);
+	color: rgb(0, 0, 0);
 	position: absolute;
 	top: 0;
 	left: 0;
 	right: 0;
-	margin-top: 50px;
+	margin-top: 45px;
 	width: 350px;
-	height: 550px;
+	height: 610px;
 	box-shadow: 20px 0px 5px 0px #A9AFA3;
 	filter: shadow(color=#999999, direction=135, strength=2);
 }
 
-span1{
+span1 {
 	margin-left: 121px;
 	display: flex;
 	white-space: nowrap;
 	border-right: 1px solid;
 	width: 10ch;
-	
 	animation: typing 0.5s steps(10), blink .5s infinite step-end alternate;
 	overflow: hidden;
 }
 
-@keyframes typing{
-	from{width: 0}
-}
-
-@keyframes blibk{
-	50%{border-color: transparent;}
-}
-
-h1 {
-	font-family: Cambria, sans-serif;
-}
-
 .img-admin {
+	background-color: rgb(225, 225, 225);
 	font-size: 15px;
 	text-align: center;
+	padding-bottom: 10px;
 }
 
 .Bienvenido {
@@ -93,28 +103,20 @@ h1 {
 	font-weight: bold;
 }
 
-hr {
-	border: 1px solid black;
-}
-
 .caja {
-	margin-top: -35px;
+	padding-top: 40px;
+	padding-left: 30px;
 	font-family: Markazi Text;
 	text-align: left;
 	font-size: 20px;
 	width: 350px;
 	position: relative;
-}
-
-.img1 {
-	font-size: 22px;
-	font-family: Markazi Text;
-	vertical-align: middle;
+	margin-top: -35px;
 }
 
 .caja nav {
 	font-family: Markazi Text;
-	color: black;
+	color: rgb(255, 255, 255);
 	text-decoration: none;
 	right: 0;
 }
@@ -127,26 +129,23 @@ hr {
 
 .caja nav a {
 	font-family: Markazi Text;
-	color: #000000;
+	color: rgb(255, 255, 255);
 	font-size: 15px;
 	text-decoration: none;
 }
 
 .caja a:link {
 	padding-top: 20px;
-	color: black;
 	text-decoration: none;
 }
 
 .caja a:visited {
-	color: black;
 	text-decoration: none;
 }
 
 ul1 {
 	letter-spacing: 0.225px;
 	font-size: 10px;
-	font-family: Markazi Text;
 	position: relative;
 	display: flex;
 	flex-direction: column;
@@ -161,73 +160,87 @@ ul1 li1 {
 
 ul1 li1 a {
 	letter-spacing: 0.225px;
-	font-family: Markazi Text;
 	position: relative;
 	font-size: 5em;
 	text-decoration: none;
 	line-height: 1em;
 	text-transform: uppercase;
-	color: transparent;
-	-webkit-text-stroke: 5px rgba(255, 255, 255, 0.5);
 	white-space: nowrap;
-	text-overflow: ellipsis;
 	overflow: hidden;
 }
 
 ul1 li1 a::before {
 	letter-spacing: 0.225px;
-	font-family: Markazi Text;
 	margin-top: 28px;
 	margin-left: 44px;
 	content: attr(data-text);
 	position: absolute;
-	color: var(--clr);
 	width: 0;
+	-webkit-text-stroke: 0.25px #0051ff;
 	overflow: hidden;
 	transition: 1s;
-	border-right: 2px solid var(--clr);
-	-webkit-text-stroke: 1px var(--clr);
 	white-space: nowrap;
-	text-overflow: ellipsis;
-	overflow: hidden;
 }
 
 ul1 li1 a:hover::before {
 	letter-spacing: 0.225px;
-	font-family: Markazi Text;
 	width: 300px;
-	filter: drop-shadow(0 0 25px var(--clr));
 	white-space: nowrap;
-	text-overflow: ellipsis;
-	overflow: hidden;
 }
 
-.tickethub {
-	margin-top: 10px;
-	height: 60px;
-	font-family: Goudy Bookletter 1911;
-	text-align: center;
-	font-size: 50px;
-	font-weight: bold;
-	color: white;
-	background-color: rgba(24, 45, 64, 1);
+li1{
+	display: inline-block;
+	position: relative;
+	color: #0051ff;
+	font-family: sans-serif;
+	font-size: 20px;
+	cursor: pointer;
+	transition: 0.2s all ease;
+}
+
+li1:hover{
+	color: #cdcdcd;
+	transition: 0.2s all ease;
+}
+
+li1::after{
+	content: '';
+	position: absolute;
+	width: 100%;
+	transform: scaleX(0);
+	height: 2px;
+	bottom: -5px;
+	left: 0;
+	background-color: #0051ff;
+	transform-origin: bottom right;
+	transition: transform 0.2s ease-out;
+	
+}
+
+li1:hover::after{
+	transform: scaleX(1);
+	transform-origin: bottom left;
 }
 
 .segundaria {
-	margin-left: 400px;
+	margin-left: 300px;
 	margin-top: 50px;
 	display: inline-block;
 	align-items: inherit;
 	box-sizing: border-box;
 	padding: 10px 20px;
-	width: 900px;
-	height: 400px;
-
+	width: 1020px;
+	height: 500px;
 }
 
 .ancha-izquierda {
-	width: 1200px;
+	width: 1300px;
 	margin-left: 20px;
+}
+
+.table thead tr:first-child {
+	background-color: black;
+	color: white;
 }
 
 span {
@@ -240,22 +253,31 @@ span {
 	font-weight: bold;
 }
 
+.wrapper {
+  position: relative;
+  /* Establecer la altura máxima de la tabla para que pueda crecer sin salir del wrapper */
+  max-height: 500px;
+  overflow-y: auto;
+}
+
 .tabla {
 	position: relative;
 	margin-left: 50px;
 	z-index: 1;
+	padding-bottom: 50px;
+	/* Agregar padding inferior para dar espacio al footer */
 }
 
 footer h1 {
 	padding-left: 40px;
-	padding-top: 10px;
+	padding-top: 3px;
+	margin-top: 27px;
 	text-align: start;
 	font-size: 22px;
 	color: white;
-	position: absolute;
-	margin-top: 140PX;
+	position: fixed;
 	width: 1000px;
-	height: 50px;
+	height: 40px;
 	background: rgb(24, 45, 64);
 	background: linear-gradient(90deg, rgba(24, 45, 64, 1) 21%, rgba(27, 42, 55, 1) 40%, rgba(34, 34, 34, 1) 100%);
 	z-index: 0;

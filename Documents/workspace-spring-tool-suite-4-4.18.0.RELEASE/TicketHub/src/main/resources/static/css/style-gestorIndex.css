@@ -59,7 +59,7 @@ main {
 	margin-left: 10px;
 }
 
-.bi-person-fill-check {
+.bi-person-fill {
 	height: 150px;
 	width: 150px;
 	border-radius: 50%;
@@ -200,7 +200,7 @@ ul1 li1 a:hover::before {
 	white-space: nowrap;
 }
 
-li1{
+li1 {
 	display: inline-block;
 	position: relative;
 	color: #0051ff;
@@ -210,12 +210,12 @@ li1{
 	transition: 0.2s all ease;
 }
 
-li1:hover{
+li1:hover {
 	color: #cdcdcd;
 	transition: 0.2s all ease;
 }
 
-li1::after{
+li1::after {
 	content: '';
 	position: absolute;
 	width: 100%;
@@ -226,10 +226,10 @@ li1::after{
 	background-color: #0051ff;
 	transform-origin: bottom right;
 	transition: transform 0.2s ease-out;
-	
+
 }
 
-li1:hover::after{
+li1:hover::after {
 	transform: scaleX(1);
 	transform-origin: bottom left;
 }
@@ -266,10 +266,10 @@ span {
 }
 
 .wrapper {
-  position: relative;
-  /* Establecer la altura máxima de la tabla para que pueda crecer sin salir del wrapper */
-  max-height: 500px;
-  overflow-y: auto;
+	position: relative;
+	/* Establecer la altura máxima de la tabla para que pueda crecer sin salir del wrapper */
+	max-height: 500px;
+	overflow-y: auto;
 }
 
 .tabla {
