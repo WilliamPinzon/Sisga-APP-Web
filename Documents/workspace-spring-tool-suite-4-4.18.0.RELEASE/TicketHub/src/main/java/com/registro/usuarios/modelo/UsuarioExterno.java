@@ -1,18 +1,13 @@
 package com.registro.usuarios.modelo;
 
 import java.time.LocalDateTime;
-import java.util.Collection;
-
-import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
-import javax.persistence.FetchType;
+import javax.persistence.EnumType;
+import javax.persistence.Enumerated;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.JoinColumn;
-import javax.persistence.JoinTable;
-import javax.persistence.ManyToMany;
 import javax.persistence.Table;
 import javax.persistence.UniqueConstraint;
 
@@ -30,30 +25,33 @@ public class UsuarioExterno {
     @Column(name = "apellido")
     private String apellido;
     private String username;
-    private String password;
-    @ManyToMany(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
-    @JoinTable(name = "usuarios_externos__roles", joinColumns = @JoinColumn(name = "usuario_externo_id", referencedColumnName = "id"), inverseJoinColumns = @JoinColumn(name = "rol_id", referencedColumnName = "id"))
-    private Collection<Rol> roles;
     @Column(name = "fecha_de_registro")
     private LocalDateTime fechaDeRegistro= LocalDateTime.now();
+    private Integer cedula;
+    
+    @Column(name = "facultad")
+    @Enumerated(EnumType.STRING)
+    private Facultad facultad;
 
-    public UsuarioExterno(Long id, String nombre, String apellido, String username, String password, Collection<Rol> roles) {
+
+
+    public UsuarioExterno(Long id, String nombre, String apellido, String username, Integer cedula,Facultad Facultad) {
         super();
         this.id = id;
         this.nombre = nombre;
         this.apellido = apellido;
         this.username = username;
-        this.password = password;
-        this.roles = roles;
+        this.cedula = cedula;
+        this.facultad = Facultad;
     }
 
-    public UsuarioExterno(String nombre, String apellido, String username, String password, Collection<Rol> roles) {
+    public UsuarioExterno(String nombre, String apellido, String username, Integer cedula,Facultad Facultad) {
         super();
         this.nombre = nombre;
         this.apellido = apellido;
         this.username = username;
-        this.password = password;
-        this.roles = roles;
+        this.cedula = cedula;
+        this.facultad = Facultad;
     }
 
     public UsuarioExterno() {
@@ -89,23 +87,15 @@ public class UsuarioExterno {
 
     public void setUsername(String username) {
         this.username = username;
-    }
+    } 
 
-    public String getPassword() {
-        return password;
-    }
+	public Integer getCedula() {
+		return cedula;
+	}
 
-    public void setPassword(String password) {
-        this.password = password;
-    }
-
-    public Collection<Rol> getRoles() {
-        return roles;
-    }
-
-    public void setRoles(Collection<Rol> roles) {
-        this.roles = roles;
-    }
+	public void setCedula(Integer cedula) {
+		this.cedula = cedula;
+	}
 
 	public LocalDateTime getFechaDeRegistro() {
 		return fechaDeRegistro;
@@ -115,6 +105,14 @@ public class UsuarioExterno {
 		this.fechaDeRegistro = fechaDeRegistro;
 	}
 
+	public Facultad getFacultad() {
+		return facultad;
+	}
 
-    
+	public void setFacultad(Facultad facultad) {
+		this.facultad = facultad;
+	}
+	
+	
+	    
 }

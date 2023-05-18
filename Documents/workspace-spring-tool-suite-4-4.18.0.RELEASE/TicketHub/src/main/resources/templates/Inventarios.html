@@ -3,7 +3,7 @@
 
 <head>
 	<meta charset="utf-8">
-	<title>Configuracion de Usuarios</title>
+	<title>Inventarios</title>
 	<!-- Latest compiled and minified CSS -->
 	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css"
 		integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
@@ -28,7 +28,7 @@
 						<li sec:authorize="isAuthenticated()">
 							<a th:href="@{/logout}">
 								<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
-									class=	"bi bi-door-open" viewBox="0 0 16 16">
+									class="bi bi-door-open" viewBox="0 0 16 16">
 									<path d="M8.5 10c-.276 0-.5-.448-.5-1s.224-1 .5-1 .5.448.5 1-.224 1-.5 1z" />
 									<path
 										d="M10.828.122A.5.5 0 0 1 11 .5V1h.5A1.5 1.5 0 0 1 13 2.5V15h1.5a.5.5 0 0 1 0 1h-13a.5.5 0 0 1 0-1H3V1.5a.5.5 0 0 1 .43-.495l7-1a.5.5 0 0 1 .398.117zM11.5 2H11v13h1V2.5a.5.5 0 0 0-.5-.5zM4 1.934V15h6V1.077l-6 .857z" />
@@ -142,14 +142,65 @@
 			<div class="container1">
 				<div class="tabla">
 					<div class="busqueda">
-						<h2>Usuarios Registrados</h2>
+						<h2>
+							<label for="filtroSelect" class="activos">
+								<a th:href="@{/activos}" id="verActivos">Ver Activos</a>
+							</label>
+						</h2>
+
 						<div class="buscar">
-							<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
-								class="bi bi-search" viewBox="0 0 16 16">
-								<path
-									d="M11.742 10.344a6.5 6.5 0 1 0-1.397 1.398h-.001c.03.04.062.078.098.115l3.85 3.85a1 1 0 0 0 1.415-1.414l-3.85-3.85a1.007 1.007 0 0 0-.115-.1zM12 6.5a5.5 5.5 0 1 1-11 0 5.5 5.5 0 0 1 11 0z" />
-							</svg>
-							<input id="buscarInput" onkeyup="buscarUsuario()" placeholder="Buscar por Nombre...">
+
+
+							<label for="filtroSelect" style="height: 20px;">Categoria:</label>
+							<select id="filtroSelect" onchange="filtrarInventarios(this.value)" style="height: 30px;">
+								<option value="">Todos</option>
+								<option value="computadoras">Computadores Portatiles</option>
+								<option value="camaras">Camaras Profesionales</option>
+								<option value="videobeams">Videobeams</option>
+							</select>
+
+
+							<label for="filtroSelectEstado" style="height: 20px;">Estado:</label>
+							<select id="filtroSelectEstado" onchange="filtrarEstados(this.value)"
+								style="height: 30px; margin-right: 15px;">
+								<option value="activo">Disponible</option>
+								<option value="inactivo">En Prestamo</option>
+							</select>
+
+							<script>
+								function filtrarInventarios() {
+									var filtro = document.getElementById("filtroSelect").value;
+									var url = "/inventarios?filtro=" + filtro;
+									location.href = url;
+								}
+
+								// Establecer el valor seleccionado después de cargar la página
+								window.onload = function () {
+									var filtroParam = new URLSearchParams(window.location.search).get('filtro');
+									if (filtroParam) {
+										document.getElementById("filtroSelect").value = filtroParam;
+									}
+								};
+
+								function filtrarEstados() {
+									var filtroEstado = document.getElementById("filtroSelectEstado").value;
+									var url = "/inventarios?filtroEstado=" + filtroEstado;
+									location.href = url;
+								}
+
+								// Establecer el valor seleccionado después de cargar la página
+								window.onload = function () {
+									var filtroEstadoParam = new URLSearchParams(window.location.search).get('filtroEstado');
+									if (filtroEstadoParam) {
+										document.getElementById("filtroSelectEstado").value = filtroEstadoParam;
+									}
+								};
+							</script>
+
+							<input id="buscarInput" onkeyup="buscarUsuario()" placeholder="Buscar por Serial..."
+								style="height: 30px; width: 150px;">
+
+
 						</div>
 					</div>
 					<br>
@@ -157,185 +208,29 @@
 						<table class="table table-striped table-bordered"
 							style="background-color:rgba(204, 191, 178, 0.788)">
 
-
 							<thead class="table-dark">
 								<tr>
-									<th>Nombre</th>
-									<th>Cedula</th>
-									<th>Apellido</th>
-									<th>Usuario</th>
-									<th>Fecha de Registro</th>
-									<th>Editar Datos</th>
-									<th>Eliminar</th>
+									<th>ID_Codigo</th>
+									<th>Descripcion</th>
+									<th>Referencia</th>
+									<th>Serial</th>
+									<th>Estado</th>
+
 								</tr>
 							</thead>
 
 							<tbody>
-								<tr th:each="usuario : ${usuarios_externos}">
-									<th:block th:if="${usuario.username}">
-										<td th:text="${usuario.nombre}">ID</td>
-										<td th:text="${usuario.cedula}">ID</td>
-										<td th:text="${usuario.apellido}">ID</td>
-										<td th:text="${usuario.username}">ID</td>
-										<td
-											th:text="${#temporals.format(usuario.fechaDeRegistro, 'yyyy-MM-dd HH:mm:ss')}">
-											ID</td>
-										<td>
-											<button class="toggle-btn">Editar Datos</button>
-											<form class="user-form" th:action="@{/modificar-usuarioExterno}"
-												method="post" style="display:none"
-												onsubmit="return confirm('¿Está seguro de almacenar los cambios realizados?')">
-
-												<br>
-												<input type="hidden" name="id" th:value="${usuario.id}" />
-
-												<h6>Nombre:</h6>
-												<input type="text" name="nombre" th:value="${usuario.nombre}"
-													onchange="validateNombre(this)" required autofocus="autofocus" />
-
-												<script>
-													function validateNombre(input) {
-														const regex = /^[a-zA-Z\u00C0-\u017F ]*$/;
-														if (!regex.test(input.value)) {
-															alert("El nombre solo debe contener letras (Se permiten las tíldes).");
-															input.value = "";
-														}
-													}
-
-												</script>
-
-												<h6>Apellido:</h6>
-												<input type="text" name="apellido" th:value="${usuario.apellido}"
-													onchange="validateApellido(this)" required autofocus="autofocus" />
-
-												<script>
-													function validateApellido(input) {
-														const regex = /^[a-zA-Z\u00C0-\u017F ]*$/;
-														if (!regex.test(input.value)) {
-															alert("El Apellido solo debe contener letras (Se permiten las tildes).");
-															input.value = "";
-														}
-													}
-												</script>
-
-												<h6>Cedula:</h6>
-												<input type="text" name="cedula" th:value="${usuario.cedula}"
-													onchange="validateCedula(this)" required autofocus="autofocus" />
-
-												<script>
-													function validateCedula(input) {
-														const regex = /^[0-9]*$/;
-														if (!regex.test(input.value)) {
-															alert("El campo solo debe contener números.");
-															input.value = "";
-														}
-													}
-												</script>
-
-												<h6>Usuario:</h6>
-
-												<input type="email" name="username" th:value="${usuario.username}"
-													onchange="validateUser(this)" required autofocus="autofocus"
-													maxlength="30" />
-
-												<script>
-													function validateUser(input) {
-														const regex = /^[a-zA-Z][a-zA-Z0-9]*@[^\s@]+\.[^\s@]+$/;
-														if (!regex.test(input.value)) {
-															alert('El usuario debe ser en formato de correo electrónico, no debe empezar por números ni caracteres y pertenecer al dominio @ucooperativa.edu.co \nEjemplo: "ejemplo@ucooperativa.edu.co"');
-															input.value = "";
-														} else if (input.value.length > 70) {
-															alert('El usuario debe tener una longitud máxima de 70 caracteres.');
-															input.value = input.value.substring(0, 70);
-														} else if (!input.value.endsWith('@ucooperativa.edu.co')) {
-															alert('El Usuario debe pertenecer al dominio @ucooperativa.edu.co');
-															input.value = "";
-														}
-													}
-												</script>
-
-												<h6>Facultad:</h6>
-
-												<select name="facultad" required>
-													<option
-														th:each="f : ${T(com.registro.usuarios.modelo.Facultad).values()}"
-														th:value="${f}" th:text="${f.getNombre()}"></option>
-												</select>
-
-
-
-
-												<br><br>
-												<button type="submit" class="btn btn-danger">
-													<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16"
-														fill="currentColor" class="bi bi-bookmark-check-fill"
-														viewBox="0 0 16 16">
-														<path fill-rule="evenodd"
-															d="M2 15.5V2a2 2 0 0 1 2-2h8a2 2 0 0 1 2 2v13.5a.5.5 0 0 1-.74.439L8 13.069l-5.26 2.87A.5.5 0 0 1 2 15.5zm8.854-9.646a.5.5 0 0 0-.708-.708L7.5 7.793 6.354 6.646a.5.5 0 1 0-.708.708l1.5 1.5a.5.5 0 0 0 .708 0l3-3z" />
-													</svg> Guardar Cambios</button>
-											</form>
-
-											<script>
-
-												// Obtenemos el formulario de eliminación de usuario por su id
-												const modificarUsuarioForm = document.getElementById('modificar-usuarioExterno');
-
-												// Agregamos un event listener para el evento "submit"
-												modificarUsuarioForm.addEventListener('submit', (event) => {
-													// Prevenimos el comportamiento por defecto de enviar el formulario
-													event.preventDefault();
-
-													// Mostramos una alerta de confirmación para asegurarnos de que el usuario desea eliminar al usuario
-
-													if (confirm('¿Está seguro de almacenar los cambios realizados? Esta acción no se puede deshacer.')) {
-														// Si el usuario confirma, enviamos el formulario
-														modificarUsuarioForm.submit();
-													}
-
-												});
-											</script>
-										</td>
-
-										<td>
-											<form th:action="@{/eliminar-usuarioExterno}" method="post"
-												onsubmit="return confirm('¿Está seguro de eliminar este Gestor?')">
-												<input type="hidden" name="id" th:value="${usuario.id}" />
-												<button type="submit" class="btn btn-danger">
-													<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16"
-														fill="currentColor" class="bi bi-trash" viewBox="0 0 16 16">
-														<path
-															d="M5.5 5.5A.5.5 0 0 1 6 6v6a.5.5 0 0 1-1 0V6a.5.5 0 0 1 .5-.5Zm2.5 0a.5.5 0 0 1 .5.5v6a.5.5 0 0 1-1 0V6a.5.5 0 0 1 .5-.5Zm3 .5a.5.5 0 0 0-1 0v6a.5.5 0 0 0 1 0V6Z" />
-														<path
-															d="M14.5 3a1 1 0 0 1-1 1H13v9a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V4h-.5a1 1 0 0 1-1-1V2a1 1 0 0 1 1-1H6a1 1 0 0 1 1-1h2a1 1 0 0 1 1 1h3.5a1 1 0 0 1 1 1v1ZM4.118 4 4 4.059V13a1 1 0 0 0 1 1h6a1 1 0 0 0 1-1V4.059L11.882 4H4.118ZM2.5 3h11V2h-11v1Z" />
-													</svg> Eliminar
-												</button>
-											</form>
+								<tr th:each="inventario : ${inventarios}">
+									<th:block th:if="${inventario.descripcion}">
+										<td th:text="${inventario.id_codigo}">ID</td>
+										<td th:text="${inventario.descripcion}">ID</td>
+										<td th:text="${inventario.referencia}">ID</td>
+										<td th:text="${inventario.serial}">ID</td>
+										<td th:text="${inventario.estado == true ? 'Disponible' : 'En Prestamo'}">ID
 										</td>
 									</th:block>
 								</tr>
 							</tbody>
-
-							<script>
-								const toggleBtns = document.querySelectorAll('.toggle-btn');
-								toggleBtns.forEach(toggleBtn => {
-									toggleBtn.addEventListener('click', () => {
-										const userForm = toggleBtn.parentNode.querySelector('.user-form');
-										if (userForm.style.display === 'none') {
-											userForm.style.display = 'block';
-											toggleBtn.innerHTML = 'Cancelar';
-
-											const cancelBtn = toggleBtn.parentNode.querySelector('.toggle-btn');
-											cancelBtn.addEventListener('click', () => {
-												window.location.href = 'configUsuarios';
-											});
-
-										} else {
-											userForm.style.display = 'none';
-											toggleBtn.innerHTML = 'Editar Datos';
-										}
-									});
-								});
-							</script>
 						</table>
 					</div>
 				</div>
@@ -352,7 +247,7 @@
 		integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa"
 		crossorigin="anonymous"></script>
 
-	<script th:src="@{/js/script-configUsuarios.js}"></script>
+	<script th:src="@{/js/script-Inventario.js}"></script>
 </body>
 
 </html>

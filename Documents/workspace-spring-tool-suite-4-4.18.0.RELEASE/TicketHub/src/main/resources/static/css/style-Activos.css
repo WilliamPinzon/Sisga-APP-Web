@@ -27,6 +27,9 @@ body {
 	margin-right: 20px;
 	padding-left: 20px;
 	padding-bottom: 5px;
+	cursor: none;
+	list-style: none;
+	text-decoration: none;
 }
 
 .busqueda .buscar {
@@ -37,6 +40,21 @@ body {
 
 #mi-enlace:hover {
 	cursor: pointer;
+}
+
+#verActivos {
+  border-bottom: none; /* Estilo de línea inferior predeterminado */
+  text-decoration: none;
+}
+
+#verActivos:active {
+  border-bottom: none; /* Elimina la línea inferior cuando se hace clic */
+  text-decoration: none;
+}
+
+#verActivos:hover {
+  border-bottom: none; /* Elimina la línea inferior cuando se hace clic */
+  text-decoration: none;
 }
 
 .ayuda {
@@ -223,16 +241,14 @@ li1:hover::after{
 }
 
 .segundaria {
-	position: static;
 	margin-left: 300px;
 	margin-top: 50px;
 	display: inline-block;
-	align-items: center;
+	align-items: inherit;
 	box-sizing: border-box;
 	padding: 10px 20px;
 	width: 1020px;
 	height: 500px;
-	z-index: 1;
 }
 
 .ancha-izquierda {

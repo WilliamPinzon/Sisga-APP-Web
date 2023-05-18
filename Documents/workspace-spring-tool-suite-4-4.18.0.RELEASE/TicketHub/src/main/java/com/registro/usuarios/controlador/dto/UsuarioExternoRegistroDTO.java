@@ -2,14 +2,17 @@ package com.registro.usuarios.controlador.dto;
 
 import java.time.LocalDateTime;
 
+import com.registro.usuarios.modelo.Facultad;
+
 public class UsuarioExternoRegistroDTO {
 
 	private Long id;
 	private String nombre;
 	private String apellido;
 	private String username;
-	private String password;
 	private LocalDateTime fechaDeRegistro= LocalDateTime.now();
+	private Integer cedula;
+	private Facultad facultad;
 
 	public Long getId() {
 		return id;
@@ -43,31 +46,34 @@ public class UsuarioExternoRegistroDTO {
 		this.username = username;
 	}
 
-	public String getPassword() {
-		return password;
+
+	public Integer getCedula() {
+		return cedula;
 	}
 
-	public void setPassword(String password) {
-		this.password = password;
+	public void setCedula(Integer cedula) {
+		this.cedula = cedula;
 	}
 
-	public UsuarioExternoRegistroDTO(Long id, String nombre, String apellido, String username, String password, LocalDateTime fechaDeRegistro) {
+	public UsuarioExternoRegistroDTO(Long id, String nombre, String apellido, String username, LocalDateTime fechaDeRegistro, Integer cedula, Facultad facultad) {
 		super();
 		this.id = id;
 		this.nombre = nombre;
 		this.apellido = apellido;
 		this.username = username;
-		this.password = password;
 		this.fechaDeRegistro= LocalDateTime.now();
+		this.cedula = cedula;
+		this.facultad = facultad;
 	}
 
-	public UsuarioExternoRegistroDTO(String nombre, String apellido, String username, String password, LocalDateTime fechaDeRegistro) {
+	public UsuarioExternoRegistroDTO(String nombre, String apellido, String username, LocalDateTime fechaDeRegistro, Integer cedula, Facultad facultad) {
 		super();
 		this.nombre = nombre;
 		this.apellido = apellido;
 		this.username = username;
-		this.password = password;
 		this.fechaDeRegistro= LocalDateTime.now();
+		this.cedula = cedula;
+		this.facultad = facultad;
 	}
 
 	public UsuarioExternoRegistroDTO(String username) {
@@ -87,6 +93,14 @@ public class UsuarioExternoRegistroDTO {
 		this.fechaDeRegistro = fechaDeRegistro;
 	}
 	
+	public Facultad getFacultad() {
+        return facultad;
+    }
+
+    public void setFacultad(Facultad facultad) {
+        this.facultad = facultad;
+    }
+
 	
 
 }

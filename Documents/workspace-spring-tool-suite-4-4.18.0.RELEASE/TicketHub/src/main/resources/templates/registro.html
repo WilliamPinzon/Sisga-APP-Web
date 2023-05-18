@@ -59,11 +59,11 @@
 		<div class="row">
 			<div class="col-md-6 col-md-offset-3">
 				<div th:if=${param.exito} style="background-color: springgreen;">
-					<div id="alertBox" style="width: 600px; height: 30px; text-align: center; padding-top: 4px;">
-						Se ha registrado el Gestor exitosamente en la aplicación
+					<div id="alertBox"
+						style="width: 250px; height: 50px; text-align: unset; padding-left: 20px; padding-top: 2px;">
+						<p>Se ha registrado el Gestor exitosamente en la aplicación</p>
 					</div>
 				</div>
-				<br>
 				<br>
 				<h1 style="text-align: center;">Registro de Gestores</h1>
 				<form th:action="@{/registro}" method="post" th:object="${usuario}">
@@ -105,18 +105,18 @@
 							autofocus="autofocus" maxlength="70" onchange="validateUser(this)">
 
 							<div th:if=${usuarioExistente} style="background-color: rgb(255, 128, 128);">
-								<div id="alertBoxred" style="width: 600px; height: 30px; text-align: center; padding-top: 4px;">
-									El Usuario ya se encuentra registrado en la base de datos.
+								<div id="alertBoxred" style="width: 250px; height: 50px; text-align: unset; padding-left: 20px; padding-top: 2px;">
+								<p>El Usuario ya se encuentra registrado en la base de datos.</p>
 								</div>
 							</div>
 							
 							<script>
 								var alertBoxred = document.getElementById('alertBoxred');
 									alertBoxred.style.position = 'fixed';
-									alertBoxred.style.top = '12%';
-									alertBoxred.style.left = '50%';
+									alertBoxred.style.top = '20%';
+									alertBoxred.style.left = '94%';
 									alertBoxred.style.transform = 'translate(-50%, -50%)';
-									alertBoxred.style.backgroundColor = 'red';
+									alertBoxred.style.backgroundColor = '#FF5A5A';
 									alertBoxred.style.borderRadius = '20px';
 									alertBoxred.style.boxShadow = '2px 2px 2px 2px rgba(0,0,0,0.25)';
 							</script>

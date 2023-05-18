@@ -44,7 +44,7 @@ function buscarUsuario() {
   var filas = tabla.getElementsByTagName("tr");
 
   for (var i = 0; i < filas.length; i++) {
-    var celda = filas[i].getElementsByTagName("td")[0];
+    var celda = filas[i].getElementsByTagName("td")[3];
     if (celda) {
       var textoCelda = celda.textContent || celda.innerText;
       if (textoCelda.toUpperCase().indexOf(filter) > -1) {

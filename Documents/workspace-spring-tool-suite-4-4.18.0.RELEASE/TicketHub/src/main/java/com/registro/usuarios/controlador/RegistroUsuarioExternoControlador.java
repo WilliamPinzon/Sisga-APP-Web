@@ -9,11 +9,13 @@ import org.springframework.web.bind.annotation.RequestMapping;
 
 import com.registro.usuarios.controlador.dto.UsuarioExternoRegistroDTO;
 import com.registro.usuarios.servicio.UsuarioExternoServicio;
+import com.registro.usuarios.modelo.*;
 
 @Controller
 @RequestMapping("/gestorRegistroDeUsuario")
 public class RegistroUsuarioExternoControlador {
 
+	private Facultad Facultad;
 	private UsuarioExternoServicio usuarioExternoServicio;
 	
 	public RegistroUsuarioExternoControlador(UsuarioExternoServicio usuarioExternoServicio) {
@@ -42,5 +44,8 @@ public class RegistroUsuarioExternoControlador {
 		usuarioExternoServicio.guardar(registroExternoDTO);
 		return "redirect:/gestorRegistroDeUsuario?exito";
 	}
+	
+
+
 	
 }
