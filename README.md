@@ -28,7 +28,7 @@ Este es un proyecto de ejemplo para un sistema de gestión de tickets, construid
 - [Licencia](#licencia)
 
 ## Descripción
-El proyecto es un sistema de gestión de tickets de soporte técnico, donde los usuarios pueden reportar problemas o solicitar ayuda a través de una interfaz web. Los tickets son asignados a diferentes técnicos y se realiza un seguimiento hasta su resolución.
+El proyecto es un sistema de gestión de pestamostecnologicos bajo un control de usuarios administradores y gestores
 
 La aplicación utiliza las siguientes tecnologías:
 - Java
